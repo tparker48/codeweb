@@ -7,7 +7,7 @@ and edge between two nodes. Node size corresponds to number of lines in the file
 Built around the pyvis, docs: https://pyvis.readthedocs.io/en/latest/
 
 ### Example
-```
+```python
   from codeweb.network_builder import NetworkBuilder
   from codeweb.import_parsing import python_import_styles
   from pyvis.network import Network
@@ -27,7 +27,7 @@ Only python is added by default, but this project is organized to make adding ne
 very straighforward. To use codeweb on other languages, you just need to use the ImportStyle class (import_parsing.py):
 
 
-```
+```python
   # Example ImportStyle for Python - 'from X.Y.Z import W':
 
     # 1. list of extensions that this rule should apply to

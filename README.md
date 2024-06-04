@@ -15,3 +15,5 @@ Outputs are:
     - html file: interactive network graph of the codebase
 
 For usage example see example.py
+
+![image](https://github.com/tparker48/codeweb/blob/main/screenshot.PNG)

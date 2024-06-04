@@ -28,25 +28,28 @@ very straighforward. To use codeweb on other languages, you just need to use the
 
 
 ```python
-  # Example ImportStyle for Python - 'from X.Y.Z import W':
+# Example: Creating an ImportStyle for python's 'from x.y.z import w' imports:
 
-    # 1. list of extensions that this rule should apply to
-    extensions = ['.py']
+# To make an ImportStyle, you need three things:
 
-    # 2. a regex that will match this import type
-    regex = '^from .+ import .+'
+# 1. File Extensions - This list of file extensions this pattern applies to
+extensions = ['.py']
 
-    # 3. a function that can pull the imported file names out of the matched text
-    def parse_from_style_import(text: str) -> List[str]:
-        words = text.split()
-        return [words[1].split('.')[-1].strip()]
+# 2. RegEx - A regex string that will match this import style (and only this import style)
+regex = '^from .+ import .+'
 
-    # Create the import style like so:
-    my_import_style = ImportStyle(extensions, regex, parse_from_style_import)
+# 3. Parsing Function - A function returning the list of imported files from regex-matched text
+def parse_matched_text(text: str) -> List[str]:
+                                                # "from x.y.z import w" 
+    imported_name = text.split()[1].strip()     # "x.y.z" 
+    module_name = imported_name.split('.')[-1]  # "z"
+    return [module_name]                        # ["z"]
 
-    # When creating the NetworkBuilder, pass it a list of any number of ImportStyle:
-    nb = NetworkBuilder(some_network, import_styles=[my_impor_style])
-]
+# Create the ImportStyle
+parse_from_x_import_y = ImportStyle(extensions, regex, parse_matched_text)
+
+# Use the custom ImportStyle
+nb = NetworkBuilder(network=empty_network, import_styles=[parse_from_x_import_y])
 ```
 
 

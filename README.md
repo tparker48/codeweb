@@ -28,28 +28,24 @@ very straighforward. To use codeweb on other languages, you just need to use the
 
 
 ```
-  # Example - Python Import Parsing:
-  
-  python_import_styles = [
-      ImportStyle(extensions=['.py'],
-                  regex='^import .+', 
-                  parse_function=parse_python_standard_import),
+  # Example ImportStyle for Python - 'from X.Y.Z import W':
 
-      ImportStyle(extensions=['.py'],
-                  regex='^from .+ import .+', 
-                  parse_function=parse_python_from_import)
+    # 1. list of extensions that this rule should apply to
+    extensions = ['.py']
 
-    def parse_python_standard_import(text):
-      imports = []
-      text = text[len('import '):]
-      words = text.split(',') if ',' in text else [text]
-      for word in words:
-          imports.append(word.split('.')[-1].strip())
-      return imports
-  
-    def parse_python_from_import(text):
+    # 2. a regex that will match this import type
+    regex = '^from .+ import .+'
+
+    # 3. a function that can pull the imported file names out of the matched text
+    def parse_from_style_import(text: str) -> List[str]:
         words = text.split()
         return [words[1].split('.')[-1].strip()]
+
+    # Create the import style like so:
+    my_import_style = ImportStyle(extensions, regex, parse_from_style_import)
+
+    When creating the NetworkBuilder, pass it a list of any number of ImportStyle:
+    nb = NetworkBuilder(some_network, import_styles=[my_impor_style])
 ]
 ```
 

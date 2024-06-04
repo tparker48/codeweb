@@ -22,7 +22,7 @@ Built around the pyvis, docs: https://pyvis.readthedocs.io/en/latest/
   populated_network.show('example.html', notebook=False)
 ```
 
-### Scanning other languages
+### Scanning Other Languages
 Only python is added by default, but this project is organized to make adding new languages
 very straighforward. To use codeweb on other languages, you just need to use the ImportStyle class (import_parsing.py):
 
@@ -52,5 +52,6 @@ parse_from_x_import_y = ImportStyle(extensions, regex, parse_matched_text)
 nb = NetworkBuilder(network=empty_network, import_styles=[parse_from_x_import_y])
 ```
 
-
+### Example Output
+To tweak graph settings, configure the pyvis Network object before passing it to NetworkBuilder
 ![image](https://github.com/tparker48/codeweb/blob/main/screenshot.PNG)

@@ -44,7 +44,7 @@ very straighforward. To use codeweb on other languages, you just need to use the
     # Create the import style like so:
     my_import_style = ImportStyle(extensions, regex, parse_from_style_import)
 
-    When creating the NetworkBuilder, pass it a list of any number of ImportStyle:
+    # When creating the NetworkBuilder, pass it a list of any number of ImportStyle:
     nb = NetworkBuilder(some_network, import_styles=[my_impor_style])
 ]
 ```

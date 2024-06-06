@@ -9,7 +9,7 @@ Built around the pyvis, docs: https://pyvis.readthedocs.io/en/latest/
 ### Example
 ```python
   from codeweb.network_builder import NetworkBuilder
-  from codeweb.import_parsing import python_import_styles
+  from codeweb.import_parsing.styles.python_styles import python_import_styles
   from pyvis.network import Network
 
   # Create a new Network with desired settings
@@ -24,33 +24,11 @@ Built around the pyvis, docs: https://pyvis.readthedocs.io/en/latest/
 
 ### Scanning Other Languages
 Only python is added by default, but this project is organized to make adding new languages
-very straighforward. To use codeweb on other languages, you just need to use the ImportStyle class (import_parsing.py):
+relatively straighforward. To use codeweb on other languages, you just need to use the ImportStyle class (import_parsing/import_style.py).
 
+An ImportStyle provides functionality for detecting import statements and parsing them. 
 
-```python
-# Example: Creating an ImportStyle for python's 'from x.y.z import w' imports:
-
-# To make an ImportStyle, you need three things:
-
-# 1. File Extensions - This list of file extensions this pattern applies to
-extensions = ['.py']
-
-# 2. RegEx - A regex string that will match this import style (and only this import style)
-regex = '^from .+ import .+'
-
-# 3. Parsing Function - A function returning the list of imported files from regex-matched text
-def parse_matched_text(text: str) -> List[str]:
-                                                # "from x.y.z import w" 
-    imported_name = text.split()[1].strip()     # "x.y.z" 
-    module_name = imported_name.split('.')[-1]  # "z"
-    return [module_name]                        # ["z"]
-
-# Create the ImportStyle
-parse_from_x_import_y = ImportStyle(extensions, regex, parse_matched_text)
-
-# Use the custom ImportStyle
-nb = NetworkBuilder(network=empty_network, import_styles=[parse_from_x_import_y])
-```
+For examples, see import_parsing/styles/python_styles.py and import_parsing/parsers/python_parsers.py
 
 ### Example Output
 To tweak graph settings, configure the pyvis Network object before passing it to NetworkBuilder

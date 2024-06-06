@@ -1,6 +1,7 @@
 import re
 from typing import List, Callable
 
+        
 class ImportStyle:
     """ ImportStyle encapsulates the logic for two things:
             1. Detecting lines that are imports
@@ -16,39 +17,22 @@ class ImportStyle:
         Args:
             - extensions (list): File extensions that this style applies to (eg ['.py']) 
             - regex (str): a regular expression that will match an import/include statement
-            - parse_function (Callable): a function that will return the list of imported files
-                from any string that matches the regex
+            - parse_function (Callable): a function that will return the list of Import objects
+                from an import statement and the path of the source file it came from
         """
         self.extenions = extensions
         self.regex = regex
         self.parse = parse_function
     
-    def get_imported_files(self, line) -> List[str]:
+    def get_imported_files(self, source_file_path, line) -> List[str]:
         if not re.match(self.regex, line):
             return []
         else:
-            return self.parse(line)
-        
+            return self.parse(source_file_path, line)
 
-# Python Import Styles:
-
-def parse_python_standard_import(text):
-    imports = []
-    text = text[len('import '):]
-    words = text.split(',') if ',' in text else [text]
-    for word in words:
-        imports.append(word.split('.')[-1].strip())
-    return imports
-
-def parse_python_from_import(text):
-    words = text.split()
-    return [words[1].split('.')[-1].strip()]
-
-python_import_styles = [
-    ImportStyle(extensions=['.py'],
-                regex='^import .+', 
-                parse_function=parse_python_standard_import),
-    ImportStyle(extensions=['.py'],
-                regex='^from .+ import .+', 
-                parse_function=parse_python_from_import)
-]
+class ImportFile():
+    """ Represents a single imported file. 
+    """
+    def __init__(self, path: str, is_external:bool):
+        self.path = path
+        self.is_external = is_external

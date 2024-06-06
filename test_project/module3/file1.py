@@ -1,0 +1,1 @@
+from .submodule1.file1 import *

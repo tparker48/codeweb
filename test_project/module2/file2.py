@@ -1,1 +1,3 @@
-from file1 import *
+import os
+import math
+import pickle

@@ -85,7 +85,7 @@ class NetworkBuilder:
         if not self.__node_exists(node_name):
             self.network.add_node(node_name, size=5+round(len(file)**0.6))
     
-    def __add_import(self, source_file: SourceFile, import_file: ImportFile):
+    def __add_import(self, source_file: SourceFile, import_file: ImportFile) -> None:
         if import_file.is_external and self.ignore_external_imports:
             return
         

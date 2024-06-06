@@ -33,6 +33,6 @@ class ImportStyle:
 class ImportFile():
     """ Represents a single imported file. 
     """
-    def __init__(self, path: str, is_external:bool):
+    def __init__(self, path: str, is_external:bool) -> None:
         self.path = path
         self.is_external = is_external

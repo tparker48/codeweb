@@ -4,7 +4,7 @@ Provides functionality to scan a codebase (any language) and create a network
 graph based on imports. Each file forms a node, and each import statement creates
 and edge between two nodes. Node size corresponds to number of lines in the file.
 
-Built around the pyvis, docs: https://pyvis.readthedocs.io/en/latest/
+Built around pyvis, docs: https://pyvis.readthedocs.io/en/latest/
 
 ### Example
 ```python

@@ -1,6 +1,6 @@
 # codeweb - Codebase Visualizer
 
-Provides functionality to scan a codebase (any language) and create a network
+Provides functionality to scan a codebase (any language) and create a interactive network
 graph based on imports. Each file forms a node, and each import statement creates
 and edge between two nodes. Node size corresponds to number of lines in the file.
 
